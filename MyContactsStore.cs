@@ -940,23 +940,10 @@ namespace MyContactsStore
             {
                 int i = (int)(newBT.Position % Cache.Length);
                 if (Cache[i] != null && Cache[i].Position!=newBT.Position)
-                    DirectSave(Cache[i]);
-                
+                    DirectSave(Cache[i]);   
                 Cache[i] = newBT;                
             }
-
         }
-
         #endregion
-
-
     }
-
-    
-
-
-    
-
-
-
 }
