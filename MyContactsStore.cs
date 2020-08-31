@@ -19,7 +19,6 @@ namespace MyContactsStore
             T=10;
         }
 
-
         public void AddContact(IPerson person)
         {
             btName=btName.Insert(person, Manag);
@@ -69,7 +68,6 @@ namespace MyContactsStore
             btName = Manag.Intitialize(Manag.RootN, new CompareByName());
             btPhone = Manag.Intitialize(Manag.RootP, new CompareByPhone());
             btAge = Manag.Intitialize(Manag.RootA, new CompareByAge());
-
         }
 
         public string AuthorFullName
@@ -198,13 +196,11 @@ namespace MyContactsStore
                 BTree btZ = manag.Allocate(Comparer);
                 btZ.Leaf = btY.Leaf;
                 btZ.Position = manag.LastInsertion;
-
-
                 int middle = btY.Size / 2;
-
                 int c = btY.KeySt.LastInsertion - (middle + 1);
                 int j = 0;
                 long tBT;
+                
                 while (c > 0)
                 {
                     if (!btY.Leaf)
@@ -237,9 +233,8 @@ namespace MyContactsStore
             {
                 Leaf = false;
                 long temp1 = Children[index];
-
                 Children[index] = nChild;
-
+                
                 for (int i = index + 1; i < KeySt.LastInsertion + 1; i++)
                 {
                     long temp2 = Children[i];
@@ -324,9 +319,7 @@ namespace MyContactsStore
                     {
                         yield return item;
                     }
-
                 }
-
                 yield break;
             }
             #endregion
@@ -385,7 +378,6 @@ namespace MyContactsStore
                     {
                         yield return item;
                     }
-
                 }
 
                 yield break;
@@ -563,7 +555,6 @@ namespace MyContactsStore
 
             #endregion
 
-
             private bool IsPrefix(string prefix, string word)
             {
                 if (word.Length < prefix.Length)
@@ -738,7 +729,6 @@ namespace MyContactsStore
 
         public class Manager
         {
-
             BTree[] Cache;
             bool enableCache;
 
@@ -752,7 +742,6 @@ namespace MyContactsStore
             public long RootN { get; set; }
             public long RootA { get; set; }
             public long RootP { get; set; }
-
 
             public Manager(System.IO.Stream Stream, int T = 0)
             {
@@ -788,7 +777,7 @@ namespace MyContactsStore
                 }
 
             }
-
+            
             public BTree Allocate(IComparer<IPerson> comparer)
             {
                 BTree temp = new BTree(T, comparer);
@@ -891,7 +880,6 @@ namespace MyContactsStore
                     }
                 }
 
-
                 byte[] buffer = new byte[28];
                 System.IO.MemoryStream memStream = new System.IO.MemoryStream(buffer);
                 System.IO.BinaryWriter tempBWriter = new System.IO.BinaryWriter(memStream);
@@ -909,7 +897,6 @@ namespace MyContactsStore
                 Stream.Dispose();
                 Stream = null;
             }
-
 
             public BTree Intitialize(long rootPos, IComparer<IPerson> Comparer)
             {
